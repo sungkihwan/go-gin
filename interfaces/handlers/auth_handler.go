@@ -49,7 +49,7 @@ func GoogleCallbackHandler(c *gin.Context) {
 
 	log.Println(token)
 
-	person, err := getUserInfoFromGoogle(token.AccessToken)
+	person, err := GetUserInfoFromGoogle(token.AccessToken)
 
 	if err != nil {
 		log.Println(err)
@@ -79,7 +79,7 @@ func GoogleCallbackHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"token": jwtToken})
 }
 
-func getUserInfoFromGoogle(accessToken string) (*people.Person, error) {
+func GetUserInfoFromGoogle(accessToken string) (*people.Person, error) {
 	ctx := context.Background()
 
 	ts := googleOauthConfig.TokenSource(ctx, &oauth2.Token{AccessToken: accessToken})

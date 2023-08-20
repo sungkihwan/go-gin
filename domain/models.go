@@ -8,3 +8,12 @@ type User struct {
 	IsDelayed *bool  `json:"isDelayed,omitempty"`
 	HasError  *bool  `json:"hasError,omitempty"`
 }
+
+type XMLRoot struct {
+	Maps []XMLMap `xml:"map"`
+}
+
+type XMLMap struct {
+	ID  string `xml:"id,attr"`
+	Key string `xml:"key"`
+}

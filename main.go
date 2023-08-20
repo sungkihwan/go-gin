@@ -8,6 +8,7 @@ import (
 	"go-gin-postgre/interfaces/handlers"
 	"go-gin-postgre/middleware"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/gin-contrib/cors"
@@ -44,6 +45,8 @@ func main() {
 	repo := infrastructures.NewUserRepository(db)
 	usecase := usecases.NewUserUsecase(repo)
 	handler := handlers.NewUserHandler(usecase)
+	macroService := usecases.NewHomtaxMacroService(&http.Client{})
+	hometaxHandler := handlers.NewHometaxHandler(macroService)
 
 	r := gin.Default()
 
@@ -64,6 +67,8 @@ func main() {
 	r.GET("/ice-servers", handlers.GetIceServers)
 	r.POST("/answer", handlers.Answer)
 	r.GET("/answer", handlers.GetAnswer)
+
+	r.POST("/hometax/login", hometaxHandler.HandleRequest)
 
 	r.Run(":8080")
 }

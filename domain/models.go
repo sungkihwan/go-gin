@@ -5,6 +5,6 @@ type User struct {
 	Name      string `json:"name"`
 	Phone     string `json:"phone"`
 	Email     string `json:"email"`
-	IsDelayed *bool  `json:"isDelayed"`
-	HasError  *bool  `json:"hasError"`
+	IsDelayed *bool  `json:"isDelayed,omitempty"`
+	HasError  *bool  `json:"hasError,omitempty"`
 }
